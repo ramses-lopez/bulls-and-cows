@@ -11,10 +11,15 @@ class Guesser
   end
 
   # Entry point for the script. Masked to implemented other guessing strategies w/ ease
-  def guess()
+  def guess(_method = :brute_force)
     @chooser.clear_guesses
-    guess = brute_force
+
+    guess = case _method
+    when :brute_force
+      brute_force
+    end
     puts "Found #{guess[:guess]} in #{@chooser.guess_count} guesses"
+    return guess[:guess]
   end
 
   private

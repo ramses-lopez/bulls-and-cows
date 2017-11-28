@@ -5,6 +5,18 @@ The user must enter a four letter word; the algorithm will try and guess that wo
 using only the feedback from the Chooser. The Chooser must enter the number of
 letters in correct places (bulls) and correct letters but in the wrong place (cows).
 
+## How to play
+1. get the code
+```shell
+git clone git@github.com:ramses-lopez/bulls-and-cows.git
+```
+1. Make sure you have ruby 2.0+ installed. If not, there are [many ways to do it](https://www.ruby-lang.org/en/documentation/installation/)
+
+1. execute the file
+```shell
+ruby bull.rb
+```
+
 ## Guessing strategy
 1. Given a user-entered word, the algorithm will try to discard all letters not present
 in it by testing it against a pre-built list of 'words':
