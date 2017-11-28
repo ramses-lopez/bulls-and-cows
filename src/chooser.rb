@@ -14,7 +14,8 @@ class Chooser
     @guess_count = 0
   end
 
-  # returns how many cows & bulls are contained in guess
+  # returns how many cows & bulls are contained in guess, and the score for this
+  # particular guess. Each Bull adds 5 points to the score, while each cow adds 1 point.
   def check_guess(guess)
     bulls = 0
     cows = 0
