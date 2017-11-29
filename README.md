@@ -1,14 +1,7 @@
-# bulls-and-cows :cow:
+# 🐂🐂🐂 Bulls and Cows 🐄🐄🐄
 A ruby implementation of the bulls and cows game, 4-letter word version.
 
-The user must enter a four letter word; the algorithm will try and guess that word,
-using only the feedback from the Chooser. The Chooser must enter the number of
-letters in correct places (bulls) and correct letters but in the wrong place (cows).
-
-The guessing strategy used in the CLI is `replacement`; details of the implementation
-are described below.
-
-## How to play
+## :cow: How to play
 1. get the code
 ```shell
 git clone git@github.com:ramses-lopez/bulls-and-cows.git
@@ -20,9 +13,27 @@ git clone git@github.com:ramses-lopez/bulls-and-cows.git
 ruby bull.rb
 ```
 
-## Guessing strategies
+## :cow: Play Modes
+1. **Auto Guess mode**:
+  The user must enter a four letter word; the algorithm will try and guess that word,
+using only the feedback from the Chooser.  
+The Chooser evaluates every guess by checking the number of letters in correct places (bulls) and correct letters but in the wrong place (cows).
 
-### Replacement
+  The guessing strategy used in the CLI is `replacement`; details of the implementation
+are described below.
+
+1. **Manual mode**:
+  This mode allows the user to try to guess a 4-letter word. After every guess from the
+player, the computer will return the number of cows and bulls present in the current
+guess.
+
+The game ends when the player successfully guess the word chosen by the computer.
+
+---
+
+## :cow: Guessing strategies
+
+### :cow: Replacement
 1. Given a user-entered word, the algorithm will try to discard all letters not present
 in it by testing it against a pre-built list of 'words':
   - ETAO
@@ -43,7 +54,7 @@ in the english language](https://en.wikipedia.org/wiki/Letter_frequency#Relative
 7. All the permutations of the remaining 4 letters are tested against the chosen word until four bulls are found.
 
 
-### Brute force
+### :cow: Brute force
 
 1. Given a user-entered word, the algorithm will try to discard all letters not present
 in it by testing it against a pre-built list of 'words':
@@ -62,3 +73,12 @@ using a scoring system to compare guesses.
   - Each bull in the word adds 5 points to the score, for a maximum of 20
   - Each cow in the word adds 1 point to the score, for a maximum of 4
 5. The algorithm ends when it finds a guess with a score of 20, or runs out of guesses.
+
+---
+
+## :cow: Tests
+
+The code comes with a set of tests. Install `bundler` then run `bundle install` to
+install the required dependences.
+
+Then, you can run `rspec` to run all the tests present in the `spec` folder.
