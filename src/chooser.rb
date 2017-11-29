@@ -4,6 +4,9 @@ class Chooser
   attr_accessor :word
   attr_accessor :dictionary
   attr_accessor :guess_count
+  # attr_accessor :word_list
+
+  WORD_LIST = %w[ BEST CATS DOGS COWS TINY TYPE ATOM RACE CARS CAPS PARK AXES ]
 
   def initialize(entry)
     @word = entry.upcase
