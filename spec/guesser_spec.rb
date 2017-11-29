@@ -1,8 +1,9 @@
+# frozen_string_literal: true
+
 require './src/guesser'
 require './src/chooser'
 
 RSpec.describe 'Guesser' do
-
   def guess(word, method)
     Guesser.new(Chooser.new(word)).guess(method)
   end
@@ -30,5 +31,4 @@ RSpec.describe 'Guesser' do
     chosen_word = 'AXES'
     expect(guess(chosen_word, :replacement)).to eq(chosen_word)
   end
-
 end

@@ -1,7 +1,8 @@
+# frozen_string_literal: true
+
 require './src/chooser'
 
 RSpec.describe 'Chooser' do
-
   it 'should return the number of cows & bulls from a guess' do
     c = Chooser.new('CATS')
     r = c.check_guess('HATS')
@@ -27,5 +28,4 @@ RSpec.describe 'Chooser' do
   it 'should not allow duplicate letters' do
     expect { Chooser.new('bell') }.to raise_error RuntimeError
   end
-
 end

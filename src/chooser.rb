@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Chooser
   attr_accessor :word
   attr_accessor :dictionary
@@ -29,7 +31,7 @@ class Chooser
       end
     end
     @guess_count += 1
-    {guess: guess, cows: cows, bulls: bulls, score: (bulls*5+cows)}
+    { guess: guess, cows: cows, bulls: bulls, score: (bulls * 5 + cows) }
   end
 
   private

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require './src/guesser'
 require './src/chooser'
 
@@ -24,7 +26,7 @@ def get_input
   puts 'Enter your 4-letter word (or enter q to exit):'
   word = gets.chomp
 
-  exit_game if(word == 'q')
+  exit_game if word == 'q'
 
   begin
     best_guess = Guesser.new(Chooser.new(word)).guess
