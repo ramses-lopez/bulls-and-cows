@@ -38,6 +38,7 @@ class Chooser
 
   def validate
     raise 'Word must have 4 letters' unless @word.size == 4
+    raise 'Only letters are allowed' unless /[a-zA-Z]{4}/.match @word
   end
 
   def build_dictionary

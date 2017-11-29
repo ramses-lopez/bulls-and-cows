@@ -17,7 +17,11 @@ RSpec.describe 'Chooser' do
   end
 
   it 'should validate the size of the word' do
-    expect { Chooser.new('FIGHT') }.to raise_error RuntimeError
+    expect { Chooser.new('FIGHT') }.to raise_error(RuntimeError, 'Word must have 4 letters')
+  end
+
+  it 'should validate that only numbers are entered ' do
+    expect { Chooser.new('FIG1') }.to raise_error(RuntimeError, 'Only letters are allowed')
   end
 
   it 'should uppercase any entry' do
@@ -26,6 +30,6 @@ RSpec.describe 'Chooser' do
   end
 
   it 'should not allow duplicate letters' do
-    expect { Chooser.new('bell') }.to raise_error RuntimeError
+    expect { Chooser.new('bell') }.to raise_error(RuntimeError, 'Word must not have duplicate letters')
   end
 end
