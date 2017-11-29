@@ -8,7 +8,7 @@ class Guesser
     @chooser = word
     # https://en.wikipedia.org/wiki/Letter_frequency#Relative_frequencies_of_letters_in_the_English_language
     # combination of guesses, based on the most frequent letters in english language
-    @initial_guesses = %w[ETAO INSH RDLC UMWF GYPB VKJX QZJX]
+    @initial_guesses = %w[ETAO INSH RDLC UMWF GYPB VKJX QZQZ]
   end
 
   # Entry point for the script. Masked to implemented other guessing strategies w/ ease
@@ -68,14 +68,15 @@ class Guesser
       end
     end
 
-    # all the remaining letters are accumulated in a set, and the unused letter
-    # is removed
+    # all the remaining letters are accumulated in a set,
+    # and the unused letter is removed from the array
     tmp = candidates.reduce([]) { |acum, cand| acum + cand[:guess].split('') }
     letters = tmp.reject {|l| l == letter_not_used}
 
     best_guess = nil
 
     # now check the permutation of just 4 letters to find the chosen word
+    # score == 20 when 4 bulls are
     letters.to_a.permutation(4).each do |group|
       r = @chooser.check_guess(group.join(''))
       best_guess = r if r[:score] == 20
