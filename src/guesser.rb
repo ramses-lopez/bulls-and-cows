@@ -1,3 +1,4 @@
+require 'byebug'
 
 class Guesser
   attr_accessor :chooser
@@ -11,18 +12,79 @@ class Guesser
   end
 
   # Entry point for the script. Masked to implemented other guessing strategies w/ ease
-  def guess(_method = :brute_force)
+  def guess(_method = :replacement)
     @chooser.clear_guesses
 
     guess = case _method
     when :brute_force
       brute_force
+    else
+      replacement
     end
     puts "Found #{guess[:guess]} in #{@chooser.guess_count} guesses"
     return guess[:guess]
   end
 
   private
+
+  def replacement
+
+    candidates = []
+
+    # this is a letter that is not in the chosen word
+    letter_not_used = nil
+
+    # first phase, where we try to find at least 4 words w/ 1 cow
+    # this phase will discard all the letters not present in the chosen word
+    @@initial_guesses.each do |guess|
+      feedback = @chooser.check_guess(guess)
+
+      # will only return if user enters one of the initial guesses
+      return feedback if feedback[:bulls] == 4
+
+      # if user entered one of the initial guesses in different order
+      if feedback[:cows] == 4
+        candidates.push(feedback)
+        break
+      end
+
+      letter_not_used = guess.split('').sample if letter_not_used.nil? && feedback[:bulls] == 0 && feedback[:cows] == 0
+      candidates.push(feedback) if feedback[:bulls] > 0 || feedback[:cows] > 0
+    end
+
+    # this block replaces every letter of every word with the unused letters
+    # so that we can discard the letters that do not affect the score
+    candidates.each do |cand|
+      word = cand[:guess]
+      (0..3).each do |i|
+        l = word[i]
+        word[i] = letter_not_used
+
+        r = @chooser.check_guess(word)
+
+        # if replacing the letter lowers the score, then l is a letter from
+        # the chosen word. In that case, let's restore it.
+        word[i] = l if r[:cows] < cand[:cows]
+        word[i] = l if r[:bulls] < cand[:bulls]
+      end
+    end
+
+    # all the remaining letters are accumulated in a set, and the unused letter
+    # is removed
+    tmp = candidates.reduce([]) { |acum, cand| acum + cand[:guess].split('') }
+    letters = Set.new(tmp)
+    letters.delete letter_not_used
+
+    best_guess = nil
+
+    # now check the permutation of just 4 letters to find the chosen word
+    letters.to_a.permutation(4).each do |group|
+      r = @chooser.check_guess(group.join(''))
+      best_guess = r if r[:score] == 20
+    end
+
+    best_guess
+  end
 
   def brute_force
     candidates = []
