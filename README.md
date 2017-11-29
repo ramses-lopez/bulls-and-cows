@@ -29,8 +29,6 @@ guess.
 
 The game ends when the player successfully guess the word chosen by the computer.
 
----
-
 ## :cow: Guessing strategies
 
 ### :cow: Replacement
@@ -73,8 +71,6 @@ using a scoring system to compare guesses.
   - Each bull in the word adds 5 points to the score, for a maximum of 20
   - Each cow in the word adds 1 point to the score, for a maximum of 4
 5. The algorithm ends when it finds a guess with a score of 20, or runs out of guesses.
-
----
 
 ## :cow: Tests
 
